@@ -1,0 +1,113 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Name</title>
+</head>
+<body>
+    <h1>Update Name</h1>
+    <input type="text" placeholder="New Name" id="name">
+    <input type="text" placeholder="Email" id="email">
+    <input type="password" placeholder="Password" id="pass">
+    <button type="submit" id="submit">Submit</button>
+    
+    <script>
+       const usnInput =document.getElementById('name')
+       const usnEmail =document.getElementById('email')
+       const passInput = document.getElementById('pass');
+       const btnSub =document.getElementById('submit')
+
+       btnSub.addEventListener("click",(e)=>{
+        e.preventDefault()
+        
+         
+                const usn = usnInput.value;
+                const email = emailInput.value;     
+                const pass = passInput.value;
+                
+                usnInput.value = "";
+                emailInput.value = "";      
+                passInput.value = "";
+         
+        const userData={email,pass}
+        console.log(userData)
+
+        fetch('/updateName',{
+            method:"GET",
+            headers:{ "Content-Type":"application/json"},
+            body : JSON.stringify(userData)
+        }).then((res)=>res.json())
+            .then((data)=>{
+                alert(data.message);
+                console.log(data)
+            })
+          .catch((err)=>{
+            console.log(err)
+            alert("Something went wrong while logging in.");
+        })
+    })
+
+
+
+    </script>
+
+
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup page</title>
+</head>
+<body>
+    <h1>Signup page</h1>
+    <form>
+        <input type="text" placeholder="Username" id="usn">
+        <input type="text" placeholder="Email" id="email">
+        <input type="password" placeholder="Password" id="pass">
+        <button type="submit" id="submit">Submit</button>
+
+
+        <script>
+            const usnInput = document.getElementById('usn');
+            const emailInput = document.getElementById('email');
+            const passInput = document.getElementById('pass');
+            const subBtn = document.getElementById('submit');
+
+            subBtn.addEventListener("click",(e)=>{
+                e.preventDefault()
+                
+                const usn = usnInput.value;
+                const email = emailInput.value;     
+                const pass = passInput.value;
+                
+                usnInput.value = "";
+                emailInput.value = "";      
+                passInput.value = "";
+                 
+                const userData={usn,email,pass}
+                console.log(userData)
+
+                fetch('/upDateName',{
+                    method:"PUT",
+                    headers:{ "Content-Type":"application/json"},
+                    body:JSON.stringify(userData)
+                }) .then((res) => res.json()) 
+                   .then((data) => {
+                          alert(data.message);  
+                          console.log(data);
+                          })
+                .catch((err) => {
+                  console.error(err);
+                  alert(data.message);
+                });
+
+                  
+            })
+        </script>
+    </form>
+</body>
+</html>

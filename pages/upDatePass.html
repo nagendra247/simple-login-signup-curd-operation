@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup page</title>
+</head>
+<body>
+    <h1>Update password page</h1>
+    <form>
+         
+        <input type="text" placeholder="Email" id="email">
+        <input type="password" placeholder="Current Password" id="pass">
+        <input type="password" placeholder="New Password" id="newpass">
+        <button type="submit" id="submit">Submit</button>
+
+
+        <script>
+            
+            const emailInput = document.getElementById('email');
+            const passInput = document.getElementById('pass');
+            const passInputNew = document.getElementById('newpass');
+            const subBtn = document.getElementById('submit');
+
+            subBtn.addEventListener("click",(e)=>{
+                e.preventDefault()
+                
+                 
+                const email = emailInput.value;     
+                const pass = passInput.value;
+                const newpass = passInputNew.value;
+                
+                 
+                emailInput.value = "";      
+                passInput.value = "";
+                passInputNew.value = "";
+                 
+                const userData={email,pass,newpass}
+                console.log(userData)
+
+                fetch('/upDatePass',{
+                    method:"PUT",
+                    headers:{ "Content-Type":"application/json"},
+                    body : JSON.stringify(userData)
+                }).then((res)=>res.json())
+                    .then((data)=>{
+                        alert(data.message);
+                        console.log(data)
+                    })
+                  .catch((err)=>{
+                    console.log(err)
+                    alert("Something went wrong while logging in.");
+                })
+            })
+        </script>
+    </form>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Account</title>
+</head>
+<body>
+    <h1>Delete Account</h1>
+    <form >
+        <input type="text" placeholder="Email" id="email">
+        <input type="password" placeholder="Password" id="pass">
+        <button type="submit" id="submit">Submit</button>
+    </form>
+
+    <script>
+        const emailInput =document.getElementById("email")
+        const passInput =document.getElementById("pass")
+        const subBtn =document.getElementById("submit")
+
+        subBtn.addEventListener("click",(e)=>{
+            e.preventDefault()
+
+            const email =emailInput.value;
+            const pass =passInput.value;
+
+            const userData={email,pass}
+            console.log(userData)
+
+            fetch('/deleteAcc',{
+                method:"DELETE",
+                headers:{"Content-Type":"application/json"},
+                body: JSON.stringify(userData)
+            }).then((res)=>res.json())
+            .then((data)=>{
+                console.log(data)
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
+
+
+        })
+    </script>
+    
+</body>
+</html>
